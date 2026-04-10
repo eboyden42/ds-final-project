@@ -32,8 +32,14 @@ for file in files:
 
         print(f"Face {i} Bounding Box: Top-Left ({x1}, {y1}), Bottom-Right ({x2}, {y2})")
         print(f"Detection Score: {face.det_score:.4f}")
+        print(f"Pose: {face.pose}")
+        print(f"KPS: {face.kps}")
+        print(f"calculated angle: {np.arctan((face.kps[0][1] - face.kps[1][1]) / (face.kps[0][0] - face.kps[1][0])) * 180 / np.pi:.2f} degrees")
 
         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        for kps in face.kps:
+            cv2.circle(img, (int(kps[0]), int(kps[1])), 15, (0, 0, 255), -1)
+        
 
     cv2.imshow('Detection Check', scale_for_viewing(img))
     cv2.waitKey(0)
