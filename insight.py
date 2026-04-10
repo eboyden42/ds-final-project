@@ -15,28 +15,14 @@ files = os.listdir(dataset_path)
 accepted_files = []
 features = []
 counter = 1
-valid_exts = {'.jpg', '.jpeg', '.png', '.bmp', '.webp'}
 for file in files:
-  ext = os.path.splitext(file)[1].lower()
-  if ext not in valid_exts:
-    print('skipping unsupported file %d: %s' % (counter, file))
-    counter += 1
-    continue
-
-  print('processing image %d: %s' % (counter, file))
+#   if not file.endswith('.jpg'):
+#     continue
+  print('prosessing image %d: %s'%(counter,file))
 
   img = cv2.imread(os.path.join(dataset_path, file))
-  if img is None:
-    print('skipping unreadable image %d: %s' % (counter, file))
-    counter += 1
-    continue
-
+  print
   faces = app.get(img)
-  if not faces:
-    print('no face found in %d: %s' % (counter, file))
-    counter += 1
-    continue
-
   features.append(faces[0].normed_embedding)
 
   accepted_files.append(file)
