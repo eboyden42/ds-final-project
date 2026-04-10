@@ -3,7 +3,7 @@ import torchvision.models as models
 from PIL import Image
 import os
 
-# 1. Setup Model and Official Transforms
+# use transforms from https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vgg19.html
 weights = models.VGG19_Weights.IMAGENET1K_V1
 model = models.vgg19(weights=weights)
 model.classifier = model.classifier[:-1]
@@ -16,7 +16,6 @@ preprocess = weights.transforms()
 
 image_dir = './data/gallery/test' 
 embeddings_dict = {}
-valid_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.webp')
 
 for filename in os.listdir(image_dir):
     img_path = os.path.join(image_dir, filename)
