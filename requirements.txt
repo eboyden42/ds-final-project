@@ -3,3 +3,5 @@ pillow-heif
 opencv-python
 insightface
 onnxruntime
+torch
+torchvision
