@@ -7,8 +7,7 @@ from insightface.data import get_image as ins_get_image
 
 app = FaceAnalysis()
 app.prepare(ctx_id=0, det_thresh=0.05)
-data_path = './data/probe/training' 
-files = os.listdir(data_path)
+data_path = './data/probe/training/obama_very_sad_2.jpg' 
 
 def scale_for_viewing(img, max_w=1280, max_h=720):
     h, w = img.shape[:2]
@@ -19,15 +18,12 @@ def scale_for_viewing(img, max_w=1280, max_h=720):
         return cv2.resize(img, new_size, interpolation=cv2.INTER_AREA)
     return img
 
-for file in files: 
-    print('checking image: %s'%(file))
-    img_path = os.path.join(data_path, file)
+print('checking image: %s' % (data_path))
 
-    img = cv2.imread(img_path)
-    if img is None:
-        print(f"Error: Could not read image at {img_path}")
-        continue
-
+img = cv2.imread(data_path)
+if img is None:
+    print(f"Error: Could not read image at {data_path}")
+else:
     faces = app.get(img)
 
     for i, face in enumerate(faces):
@@ -43,9 +39,7 @@ for file in files:
         cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
         for kps in face.kps:
             cv2.circle(img, (int(kps[0]), int(kps[1])), 15, (0, 0, 255), -1)
-        
 
     cv2.imshow('Detection Check', scale_for_viewing(img))
     cv2.waitKey(0)
-
-
+    cv2.destroyAllWindows()

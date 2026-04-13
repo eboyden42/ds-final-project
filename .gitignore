@@ -1,2 +1,3 @@
-# /data/*
+/data/probe/*
+/data/probe-heic/*
 /.venv/

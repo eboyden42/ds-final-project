@@ -4,10 +4,11 @@ import os
 
 pillow_heif.register_heif_opener()
 
-sub_folder = 'test'
+sub_folder = 'validation'
+main_folder = 'probe'
 
-dataset_path = f'./data/gallery-heic/{sub_folder}'
-output_path = f'./data/gallery/{sub_folder}'
+dataset_path = f'./data/{main_folder}-heic/{sub_folder}'
+output_path = f'./data/{main_folder}/{sub_folder}'
 files = os.listdir(dataset_path)
 
 os.makedirs(output_path, exist_ok=True)
